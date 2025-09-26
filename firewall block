@@ -1,0 +1,24 @@
+Commands Used on Windows Laptop
+
+Step 2: List current firewall rules PowerShell command:
+Get-NetFirewallRule -Direction Inbound | Format-Table Name, Enabled, Action, Profile
+
+Step 3: Block port 23 (Telnet)
+No explicit rule created; port 23 is blocked by default Windows firewall policy
+
+Step 4: Test the block
+Test-NetConnection -ComputerName 192.168.1.5 -Port 23
+Output:
+ TcpTestSucceeded : False
+ This confirms the port is blocked
+
+ Step 5: Allow SSH (if applicable on Linux)
+ Example command on Linux (UFW):
+sudo ufw allow 22/tcp
+
+ Step 6: Remove test block
+ Not required on Windows as no explicit rule exists for port 23
+
+ Step 8: Summary of firewall filtering
+ The firewall filters inbound traffic based on rules or default policies.
+ Ports not explicitly allowed are blocked by default.
